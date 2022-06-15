@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+    <title>DrumKit</title>
+</head>
+<style>
+    :root{
+        --transform: scale(1.01);
+        --border: 2px solid rgb(233, 214, 44);
+        --text-shadow: 0 0 1.5rem black;
+    }
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        display: flex;
+        margin: 0;
+        padding: 0;
+        /* background-color: rgb(6, 184, 184); */
+        
+        
+    }
+    section::before{
+        background: url("drumkit.png") no-repeat center center/cover;
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0.98;
+    }
+
+    section {
+        height: 100vh;
+        width: 100%;
+        border: 2px solid black;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+
+    .button {
+        border: 2px solid black;
+        margin: 2%;
+        height: 18%;
+        width: 17%;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        font-family: 'Source Serif 4', sans-serif;
+        font-weight: bold;
+        transition: all 0.07s;
+    }
+
+    .box {
+        display: flex;
+        border: 15px solid rgb(255, 255, 255);
+        margin: 4%;
+        width: 70vw;
+        height: 70vh;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 0 0 1rem black;
+
+    }
+
+    .button:hover {
+        transform: var(--transform);
+        border: var(--border);
+        text-shadow: var(--text-shadow);
+    }
+    .playing{
+        transform: scale(1.01);
+        border: 2px solid yellow;
+        text-shadow: 0 0 1.5rem black;
+    }
+    span {
+        font-size: 10px;
+        color: yellow ;
+        /* text-transform: uppercase; */
+    }
+
+    h5 {
+        margin-bottom: -.5rem;
+        margin-top: .5rem;
+        color: white ;
+    }
+</style>
+
+<body>
+    <section>
+        <div  class="row box">
+            <div data-key="65" class="col-sm-1 button">
+                <h5><b>A</b></h5>
+                <span>Boom</span>
+            </div>
+            <div data-key="66" class="col-sm-1 button">
+                <h5>B</h5>
+                <span>Clap</span>
+            </div>
+            <div data-key="67" class="col-sm-1 button">
+                <h5>C</h5>
+                <span>Hithat</span>
+            </div>
+            <div data-key="68" class="col-sm-1 button">
+                <h5>D</h5>
+                <span>Kick</span>
+            </div>
+            <div data-key="69" class="col-sm-1 button">
+                <h5>E</h5>
+                <span>Openhat</span>
+            </div>
+            <div data-key="70" class="col-sm-1 button">
+                <h5>F</h5>
+                <span>Ride</span>
+            </div>
+            <div data-key="71" class="col-sm-1 button">
+                <h5>G</h5>
+                <span>Tink</span>
+            </div>
+            <div data-key="72" class="col-sm-1 button">
+                <h5>H</h5>
+                <span>Tom</span>
+            </div>
+        </div>
+        <audio data-key="65" src="sound/01 - JavaScript Drum Kit_sounds_boom.wav"></audio>
+        <audio data-key="66" src="sound/01 - JavaScript Drum Kit_sounds_clap.wav"></audio>
+        <audio data-key="67" src="sound/01 - JavaScript Drum Kit_sounds_hihat.wav"></audio>
+        <audio data-key="68" src="sound/01 - JavaScript Drum Kit_sounds_kick.wav"></audio>
+        <audio data-key="69" src="sound/01 - JavaScript Drum Kit_sounds_openhat.wav"></audio>
+        <audio data-key="70" src="sound/01 - JavaScript Drum Kit_sounds_ride.wav"></audio>
+        <audio data-key="71" src="sound/01 - JavaScript Drum Kit_sounds_snare.wav"></audio>
+        <audio data-key="72" src="sound/01 - JavaScript Drum Kit_sounds_tink.wav"></audio>
+        <audio data-key="73" src="sound/01 - JavaScript Drum Kit_sounds_tom.wav"></audio>
+    </section>
+</body>
+<script>
+    console.log('HEYA!!');
+    window.addEventListener('keydown', function (e) {
+        //console.log(e.keyCode);
+        const audio = document.querySelector(`audio[data-key= "${e.keyCode}"]`);
+        const key = document.querySelector(`.button[data-key= "${e.keyCode}"]`);
+        if(!audio) return;
+        audio.currentTime = 0;  
+        audio.play();
+        //console.log(key);
+        key.classList.add("playing");
+        setTimeout(() =>{
+            key.classList.remove('playing');
+        }, 80);
+    })
+    // const keys = document.querySelectorAll('.button');
+    // function removeTransitioned(e){
+    //     // if(e.propertyName !== transform) return;
+    //     console.log(e);
+    // }
+    // keys.forEach(key => key.addEventListener('transitioned', removeTransitioned));
+</script>
+
+</html>
+<!-- // let canvas = document.getElementById("A_button");
+// canvas.setAttribute("tabindex", 0);
+// document.getElementById("A_button").addEventListener("keypress", function (event) {
+//     console.log('Pressed');
+// }); -->
